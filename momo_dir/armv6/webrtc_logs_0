@@ -1,0 +1,42 @@
+[000:000][995] (device_info_linux.cc:45): NumberOfDevices
+[003:045][995] (device_info_linux.cc:78): GetDeviceName
+[009:121][995] (v4l2_video_capturer.cpp:76): GetDeviceName(0): device_name=mmal service -1068856076.-10458, unique_name=platform:bcm2835-v4l2-0
+[009:121][995] (device_info_linux.cc:45): NumberOfDevices
+[012:165][995] (device_info_linux.cc:78): GetDeviceName
+[015:202][995] (v4l2_video_capturer.cpp:76): GetDeviceName(1): device_name=bcm2835-isp, unique_name=platform:bcm2835-isp
+[015:202][995] (device_info_linux.cc:45): NumberOfDevices
+[018:245][995] (device_info_linux.cc:78): GetDeviceName
+[021:282][995] (v4l2_video_capturer.cpp:76): GetDeviceName(2): device_name=bcm2835-isp, unique_name=platform:bcm2835-isp
+[021:282][995] (device_info_linux.cc:45): NumberOfDevices
+[024:324][995] (device_info_linux.cc:45): NumberOfDevices
+[027:365][995] (device_info_linux.cc:78): GetDeviceName
+[036:481][995] (v4l2_video_capturer.cpp:230): Video Capture enumerats supported image formats:
+[036:481][995] (v4l2_video_capturer.cpp:232):   { pixelformat = YU12, description = 'be83cabc' }
+[036:481][995] (v4l2_video_capturer.cpp:232):   { pixelformat = YUYV, description = 'be83cabc' }
+[036:482][995] (v4l2_video_capturer.cpp:232):   { pixelformat = RGB3, description = 'be83cabc' }
+[036:482][995] (v4l2_video_capturer.cpp:232):   { pixelformat = JPEG, description = 'be83cabc' }
+[036:482][995] (v4l2_video_capturer.cpp:232):   { pixelformat = H264, description = 'be83cabc' }
+[036:482][995] (v4l2_video_capturer.cpp:232):   { pixelformat = MJPG, description = 'be83cabc' }
+[036:482][995] (v4l2_video_capturer.cpp:232):   { pixelformat = YVYU, description = 'be83cabc' }
+[036:482][995] (v4l2_video_capturer.cpp:232):   { pixelformat = VYUY, description = 'be83cabc' }
+[036:482][995] (v4l2_video_capturer.cpp:232):   { pixelformat = UYVY, description = 'be83cabc' }
+[036:482][995] (v4l2_video_capturer.cpp:232):   { pixelformat = NV12, description = 'be83cabc' }
+[036:482][995] (v4l2_video_capturer.cpp:232):   { pixelformat = BGR3, description = 'be83cabc' }
+[036:482][995] (v4l2_video_capturer.cpp:232):   { pixelformat = YV12, description = 'be83cabc' }
+[036:482][995] (v4l2_video_capturer.cpp:232):   { pixelformat = NV21, description = 'be83cabc' }
+[036:482][995] (v4l2_video_capturer.cpp:232):   { pixelformat = RX24, description = 'be83cabc' }
+[036:482][995] (v4l2_video_capturer.cpp:248): We prefer format YU12
+[042:561][995] (v4l2_video_capturer.cpp:274): error in VIDIOC_S_FMT, errno = 22
+[042:561][995] (v4l2_video_capturer.cpp:102): Failed to start V4L2VideoCapturer(w = 640, h = 480, fps = 30)
+[042:561][995] (device_info_linux.cc:45): NumberOfDevices
+[045:605][995] (device_info_linux.cc:78): GetDeviceName
+[051:682][995] (v4l2_video_capturer.cpp:230): Video Capture enumerats supported image formats:
+[051:682][995] (v4l2_video_capturer.cpp:245): no supporting video formats found
+[051:683][995] (v4l2_video_capturer.cpp:102): Failed to start V4L2VideoCapturer(w = 640, h = 480, fps = 30)
+[051:683][995] (device_info_linux.cc:45): NumberOfDevices
+[054:725][995] (device_info_linux.cc:78): GetDeviceName
+[060:802][995] (v4l2_video_capturer.cpp:230): Video Capture enumerats supported image formats:
+[060:802][995] (v4l2_video_capturer.cpp:245): no supporting video formats found
+[060:802][995] (v4l2_video_capturer.cpp:102): Failed to start V4L2VideoCapturer(w = 640, h = 480, fps = 30)
+[060:803][995] (device_info_linux.cc:45): NumberOfDevices
+[063:846][995] (v4l2_video_capturer.cpp:61): Failed to create V4L2VideoCapturer

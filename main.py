@@ -1,17 +1,56 @@
 import RPi.GPIO as GPIO
+from AWSIoTPythonSDK.MQTTLib import AWSIoTMQTTClient
 import time
+import json
 import subprocess
 import shlex
 
+###########################################
+# AWS IoT 接続情報
+###########################################
+# モノの名前
+MQTT_CLIENT = 'mini4wd'
+# エンドポイントのURL
+ENDPOINT_URL = 'a3042qvtxfzkab-ats.iot.us-east-2.amazonaws.com'
+# エンドポイントのポート番号
+ENDPOINT_PORT = 8883
+# ルート証明書ファイル
+ROOT_CA_PATH = 'cert/rootCA.pem'
+# 個別秘密鍵ファイル
+PRIVATE_KEY_PATH = 'cert/bdecd249ca-private.pem.key'
+# 個別証明書ファイル
+PRIVATE_CERT_PATH = 'cert/bdecd249ca-certificate.pem.crt'
+
+# トピック名
+TOPIC_NAME = 'testTopic'
+
+## 受信コマンド
+STARTUP_COMMAND = "startup"
+CAMERA_ON_COMMAND = "cameraOn"
+CAMERA_OFF_COMMAND = "cameraOff"
+MOVE_COMMAND = "move"
+STOP_COMMAND = "stop"
+BACK_COMMAND = "back"
+STRAIGHT_COMMAND = "straight"
+LEFT_COMMAND = "left"
+RIGHT_COMMAND = "right"
+
+###########################################
+# GPIO 情報
+###########################################
+# LEDライト
 LED_RIGHT_PIN = 23
 LED_LEFT_PIN = 24
-
-SERVO_MOTER_PIN = 4
+# サーボモーター
+SERVO_MOTER_PIN = 7
 FREQ = 50
-SERVO_MOTER = None
-
+# モータードライバ
 MOTER_PIN_1 = 20
 MOTER_PIN_2 = 26
+
+## I/O コントローラ
+SERVO_MOTER = None
+MQTT_CLIENT = None
 
 STARTUP_DONE = False
 #######################################
@@ -117,14 +156,36 @@ def functionStartCamera():
 def functionStopCamera():
     print("functionStopCamera")
 
-functionStartUp()
-time.sleep(5)
-functionDrive()
-time.sleep(5)
-functionSuspension()
-time.sleep(5)
-functionBack()
-time.sleep(5)
-functionSuspension()
+#######################################
+# 起動時処理
+#######################################
+def init():
+    # AWS IoT Connect Info
+    global MQTT_CLIENT
+    MQTT_CLIENT = AWSIoTMQTTClient(MQTT_CLIENT)
+    MQTT_CLIENT.configureEndpoint(ENDPOINT_URL, ENDPOINT_PORT)
+    MQTT_CLIENT.configureCredentials(ROOT_CA_PATH, PRIVATE_KEY_PATH, PRIVATE_CERT_PATH)
 
-funcitonEnd()
+    # AWS IoT Connect Setting
+    MQTT_CLIENT.configureOfflinePublishQueueing(-1)
+    MQTT_CLIENT.configureDrainingFrequency(2)
+    MQTT_CLIENT.configureConnectDisconnectTimeout(10)
+    MQTT_CLIENT.configureMQTTOperationTimeout(5)
+
+    MQTT_CLIENT.connect()
+
+###########################################
+# subscribeCallback
+###########################################
+def subscribeCallback(client, userdata, message):
+    print('Received a new message')
+    print(message.payload)
+    payload = json.loads(message.payload)
+    print(payload["action"])
+    print('-------------\n\n')
+
+init()
+
+while True:
+    MQTT_CLIENT.subscribe(TOPIC_NAME, 1, subscribeCallback)
+    time.sleep(1)

@@ -63,6 +63,7 @@ def functionStartUp():
     GPIO.setup(LED_RIGHT_PIN, GPIO.OUT)
     GPIO.setup(LED_LEFT_PIN, GPIO.OUT)
 
+    global SERVO_MOTER
     GPIO.setup(SERVO_MOTER_PIN, GPIO.OUT)
     SERVO_MOTER = GPIO.PWM(SERVO_MOTER_PIN, FREQ)
     SERVO_MOTER.start(0.0)

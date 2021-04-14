@@ -78,66 +78,73 @@ def functionStartUp():
 # 終了処理
 #######################################
 def funcitonEnd():
-    print("functionEnd")
-    
-    functionSuspension()
-    
-    GPIO.output(LED_RIGHT_PIN, 0)
-    GPIO.output(LED_LEFT_PIN, 0)
-    
-    GPIO.cleanup()
-    
-    STARTUP_DONE = False
+    if STARTUP_DONE == True:
+        print("functionEnd")
+        
+        functionSuspension()
+        
+        GPIO.output(LED_RIGHT_PIN, 0)
+        GPIO.output(LED_LEFT_PIN, 0)
+        
+        GPIO.cleanup()
+        
+        STARTUP_DONE = False
     
 #######################################
 # 前進処理
 #######################################
 def functionDrive():
-    print("functionDrive")
+    if STARTUP_DONE == True:
+        print("functionDrive")
 
-    GPIO.output(MOTER_PIN_1, GPIO.HIGH)
-    GPIO.output(MOTER_PIN_2, GPIO.LOW)
+        GPIO.output(MOTER_PIN_1, GPIO.HIGH)
+        GPIO.output(MOTER_PIN_2, GPIO.LOW)
     
 #######################################
 # 停止処理
 #######################################
 def functionSuspension():
-    print("functionSuspension")
+    if STARTUP_DONE == True:
+        print("functionSuspension")
 
-    GPIO.output(MOTER_PIN_1, GPIO.LOW)
-    GPIO.output(MOTER_PIN_2, GPIO.LOW)
+        GPIO.output(MOTER_PIN_1, GPIO.LOW)
+        GPIO.output(MOTER_PIN_2, GPIO.LOW)
 #######################################
 # 後退処理
 #######################################
 def functionBack():
-    print("functionBack")
+    if STARTUP_DONE == True:
+        print("functionBack")
 
-    GPIO.output(MOTER_PIN_1, GPIO.LOW)
-    GPIO.output(MOTER_PIN_2, GPIO.HIGH)
+        GPIO.output(MOTER_PIN_1, GPIO.LOW)
+        GPIO.output(MOTER_PIN_2, GPIO.HIGH)
 
 #######################################
 # 直進処理
 #######################################
 def functionStraight():
-    print("functionStraight")
-    global SERVO_MOTER
-    SERVO_MOTER.ChangeDutyCycle(0.0)
+    if STARTUP_DONE == True:
+        print("functionStraight")
+        global SERVO_MOTER
+        SERVO_MOTER.ChangeDutyCycle(0.0)
     
 #######################################
 # 右旋回処理
 #####################################d##
 def functionRightTurn():
-    print("functionRightTurn")
-    global SERVO_MOTER
-    SERVO_MOTER.ChangeDutyCycle(2.5)
+    if STARTUP_DONE == True:
+        print("functionRightTurn")
+        global SERVO_MOTER
+        SERVO_MOTER.ChangeDutyCycle(2.5)
 
 #######################################
 # 左旋回処理
 ######################################d#
 def functionLeftTurn():
-    print("functionLeftTurn")
-    global SERVO_MOTER
-    SERVO_MOTER.ChangeDutyCycle(12.0)
+    if STARTUP_DONE == True:
+        print("functionLeftTurn")
+        global SERVO_MOTER
+        SERVO_MOTER.ChangeDutyCycle(12.0)
 
 #######################################
 # カメラ起動処理
@@ -181,8 +188,35 @@ def subscribeCallback(client, userdata, message):
     print('Received a new message')
     print(message.payload)
     payload = json.loads(message.payload)
-    print(payload["action"])
-    print('-------------\n\n')
+
+    action = payload['action']
+    direction = payload['direction']
+
+    if action == STARTUP_COMMAND:
+        ## 起動処理
+        functionStartUp()
+    elif action == CAMERA_ON_COMMAND:
+        ## カメラ起動処理
+        functionStartCamera()
+    elif action == CAMERA_OFF_COMMAND:
+        ## カメラ終了処理
+        functionStopCamera()
+    elif action == MOVE_COMMAND:
+        ## 直進処理
+        functionDrive()
+    elif action == STOP_COMMAND:
+        ## 停止処理
+        functionSuspension()
+
+    if direction == STRAIGHT_COMMAND:
+        ## 直進処理
+        functionStraight()
+    elif direction == LEFT_COMMAND:
+        ## 左旋回処理
+        functionLeftTurn()
+    elif direction == RIGHT_COMMAND:
+        ## 右旋回処理
+        functionRightTurn()
 
 init()
 

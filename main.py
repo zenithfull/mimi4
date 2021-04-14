@@ -71,13 +71,15 @@ def functionStartUp():
 
     GPIO.setup(MOTER_PIN_1, GPIO.OUT)
     GPIO.setup(MOTER_PIN_2, GPIO.OUT)
-    
+
+    global STARTUP_DONE
     STARTUP_DONE = True
 
 #######################################
 # 終了処理
 #######################################
 def funcitonEnd():
+    global STARTUP_DONE
     if STARTUP_DONE == True:
         print("functionEnd")
         
@@ -94,6 +96,7 @@ def funcitonEnd():
 # 前進処理
 #######################################
 def functionDrive():
+    global STARTUP_DONE
     if STARTUP_DONE == True:
         print("functionDrive")
 
@@ -104,6 +107,7 @@ def functionDrive():
 # 停止処理
 #######################################
 def functionSuspension():
+    global STARTUP_DONE
     if STARTUP_DONE == True:
         print("functionSuspension")
 
@@ -113,6 +117,7 @@ def functionSuspension():
 # 後退処理
 #######################################
 def functionBack():
+    global STARTUP_DONE
     if STARTUP_DONE == True:
         print("functionBack")
 
@@ -123,6 +128,7 @@ def functionBack():
 # 直進処理
 #######################################
 def functionStraight():
+    global STARTUP_DONE
     if STARTUP_DONE == True:
         print("functionStraight")
         global SERVO_MOTER
@@ -132,6 +138,7 @@ def functionStraight():
 # 右旋回処理
 #####################################d##
 def functionRightTurn():
+    global STARTUP_DONE
     if STARTUP_DONE == True:
         print("functionRightTurn")
         global SERVO_MOTER
@@ -141,6 +148,7 @@ def functionRightTurn():
 # 左旋回処理
 ######################################d#
 def functionLeftTurn():
+    global STARTUP_DONE
     if STARTUP_DONE == True:
         print("functionLeftTurn")
         global SERVO_MOTER

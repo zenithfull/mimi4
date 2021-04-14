@@ -37,6 +37,11 @@ LEFT_COMMAND = "left"
 RIGHT_COMMAND = "right"
 
 ###########################################
+# momo 起動情報
+###########################################
+MOMO_COMMAND = "./momo --no-audio-device test"
+#MOMO_COMMAND = "./momo --no-audio-device ayame wss://ayame-labo.shiguredo.jp/signaling zenithfull@mini4-room --signaling-key Nlqlm3fKd-ABK5IPoM0LS3pSPgu0DB8o_vNqB1OOahbRn634"
+###########################################
 # GPIO 情報
 ###########################################
 # LEDライト
@@ -162,7 +167,7 @@ def functionLeftTurn():
 def functionStartCamera():
     print("functionStartCamera")
     
-    args = shlex.split("./momo --no-audio-device test")
+    args = shlex.split(MOMO_COMMAND)
     ret = subprocess.Popen(args)
     
     print(ret)
@@ -216,6 +221,9 @@ def subscribeCallback(client, userdata, message):
         functionDrive()
     elif action == STOP_COMMAND:
         ## 停止処理
+        functionSuspension()
+    elif action == BACK_COMMAND:
+        ## 後退処理
         functionSuspension()
 
     if direction == STRAIGHT_COMMAND:

@@ -1,3 +1,4 @@
+import sys
 import RPi.GPIO as GPIO
 from AWSIoTPythonSDK.MQTTLib import AWSIoTMQTTClient
 import time
@@ -226,8 +227,19 @@ def subscribeCallback(client, userdata, message):
         ## 右旋回処理
         functionRightTurn()
 
-init()
+###########################################
+# メイン処理
+###########################################
+def main():
+    init()
 
-while True:
-    MQTT_CLIENT.subscribe(TOPIC_NAME, 1, subscribeCallback)
-    time.sleep(1)
+    try:
+        while True:
+            MQTT_CLIENT.subscribe(TOPIC_NAME, 1, subscribeCallback)
+            time.sleep(1)
+
+    finally:
+        funcitonEnd()
+
+if __name__ == "__main__":
+    sys.exit(main())

@@ -73,11 +73,11 @@ def functionStartUp():
     SERVO_MOTER = GPIO.PWM(SERVO_MOTER_PIN, FREQ)
     SERVO_MOTER.start(0.0)
 
-    GPIO.setup(LED_RIGHT_PIN, GPIO.OUT)
-    GPIO.setup(LED_LEFT_PIN, GPIO.OUT)
-
     GPIO.setup(MOTER_PIN_1, GPIO.OUT)
     GPIO.setup(MOTER_PIN_2, GPIO.OUT)
+
+    GPIO.output(LED_RIGHT_PIN, GPIO.HIGH)
+    GPIO.output(LED_LEFT_PIN, GPIO.HIGH)
 
     global STARTUP_DONE
     STARTUP_DONE = True
@@ -92,8 +92,8 @@ def funcitonEnd():
         
         functionSuspension()
         
-        GPIO.output(LED_RIGHT_PIN, 0)
-        GPIO.output(LED_LEFT_PIN, 0)
+        GPIO.output(LED_RIGHT_PIN, GPIO.LOW)
+        GPIO.output(LED_LEFT_PIN, GPIO.LOW)
         
         GPIO.cleanup()
         

@@ -55,9 +55,14 @@ FREQ = 50
 MOTER_PIN_1 = 21
 MOTER_PIN_2 = 26
 
+# モーター周波数
+MOTER_FREQ = 50
+
 ## I/O コントローラ
 SERVO_MOTER = None
 MQTT_CLIENT = None
+MOTOR_1 = None
+MOTER_2 = None
 
 STARTUP_DONE = False
 #######################################
@@ -78,6 +83,14 @@ def functionStartUp():
 
         GPIO.setup(MOTER_PIN_1, GPIO.OUT)
         GPIO.setup(MOTER_PIN_2, GPIO.OUT)
+
+        global MOTER_1
+        MOTOR_1 = GPIO.PWM(MOTER_PIN_1, MOTER_FREQ)
+        MOTER_1.start(0)
+
+        global MOTER_2
+        MOTOR_2 = GPIO.PWM(MOTER_PIN_2, MOTER_FREQ)
+        MOTER_2.start(0)
 
         GPIO.output(LED_RIGHT_PIN, GPIO.HIGH)
         GPIO.output(LED_LEFT_PIN, GPIO.HIGH)
@@ -107,8 +120,10 @@ def functionDrive():
     if STARTUP_DONE == True:
         print("functionDrive")
 
-        GPIO.output(MOTER_PIN_1, GPIO.HIGH)
-        GPIO.output(MOTER_PIN_2, GPIO.LOW)
+        global MOTER_1
+        MOTER_1.ChangeDutyCycle(0)
+        global MOTER_2
+        MOTER_2.ChangeDutyCycle(20)
     
 #######################################
 # 停止処理
@@ -118,8 +133,10 @@ def functionSuspension():
     if STARTUP_DONE == True:
         print("functionSuspension")
 
-        GPIO.output(MOTER_PIN_1, GPIO.LOW)
-        GPIO.output(MOTER_PIN_2, GPIO.LOW)
+        global MOTER_1
+        MOTER_1.ChangeDutyCycle(0)
+        global MOTER_2
+        MOTER_2.ChangeDutyCycle(0)
 #######################################
 # 後退処理
 #######################################
@@ -128,8 +145,10 @@ def functionBack():
     if STARTUP_DONE == True:
         print("functionBack")
 
-        GPIO.output(MOTER_PIN_1, GPIO.LOW)
-        GPIO.output(MOTER_PIN_2, GPIO.HIGH)
+        global MOTER_1
+        MOTER_1.ChangeDutyCycle(20)
+        global MOTER_2
+        MOTER_2.ChangeDutyCycle(0)
 
 #######################################
 # 直進処理

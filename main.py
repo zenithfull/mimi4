@@ -64,24 +64,26 @@ STARTUP_DONE = False
 # 起動処理
 #######################################
 def functionStartUp():
-    print("functionStartUp")
-    GPIO.setmode(GPIO.BCM)
-    GPIO.setup(LED_RIGHT_PIN, GPIO.OUT)
-    GPIO.setup(LED_LEFT_PIN, GPIO.OUT)
-
-    global SERVO_MOTER
-    GPIO.setup(SERVO_MOTER_PIN, GPIO.OUT)
-    SERVO_MOTER = GPIO.PWM(SERVO_MOTER_PIN, FREQ)
-    SERVO_MOTER.start(0.0)
-
-    GPIO.setup(MOTER_PIN_1, GPIO.OUT)
-    GPIO.setup(MOTER_PIN_2, GPIO.OUT)
-
-    GPIO.output(LED_RIGHT_PIN, GPIO.HIGH)
-    GPIO.output(LED_LEFT_PIN, GPIO.HIGH)
-
     global STARTUP_DONE
-    STARTUP_DONE = True
+    if STARTUP_DONE == False:
+        print("functionStartUp")
+        GPIO.setmode(GPIO.BCM)
+        GPIO.setup(LED_RIGHT_PIN, GPIO.OUT)
+        GPIO.setup(LED_LEFT_PIN, GPIO.OUT)
+
+        global SERVO_MOTER
+        GPIO.setup(SERVO_MOTER_PIN, GPIO.OUT)
+        SERVO_MOTER = GPIO.PWM(SERVO_MOTER_PIN, FREQ)
+        SERVO_MOTER.start(0.0)
+
+        GPIO.setup(MOTER_PIN_1, GPIO.OUT)
+        GPIO.setup(MOTER_PIN_2, GPIO.OUT)
+
+        GPIO.output(LED_RIGHT_PIN, GPIO.HIGH)
+        GPIO.output(LED_LEFT_PIN, GPIO.HIGH)
+
+        global STARTUP_DONE
+        STARTUP_DONE = True
 
 #######################################
 # 終了処理

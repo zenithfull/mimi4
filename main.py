@@ -35,12 +35,13 @@ BACK_COMMAND = "back"
 STRAIGHT_COMMAND = "straight"
 LEFT_COMMAND = "left"
 RIGHT_COMMAND = "right"
+END_COMMAND = "end"
 
 ###########################################
 # momo 起動情報
 ###########################################
 MOMO_COMMAND = "./momo --no-audio-device test"
-#MOMO_COMMAND = "./momo --no-audio-device ayame wss://ayame-labo.shiguredo.jp/signaling zenithfull@mini4-room --signaling-key Nlqlm3fKd-ABK5IPoM0LS3pSPgu0DB8o_vNqB1OOahbRn634"
+#MOMO_COMMAND = "./momo --no-audio-device ayame wss://ayame-labo.shiguredo.jp/signaling zenithfull@mini4-room --auto --audio false --video true --video-codec-type H264 --video-bit-rate 800 --signaling-key Nlqlm3fKd-ABK5IPoM0LS3pSPgu0DB8o_vNqB1OOahbRn634"
 ###########################################
 # GPIO 情報
 ###########################################
@@ -94,8 +95,6 @@ def funcitonEnd():
         
         GPIO.output(LED_RIGHT_PIN, GPIO.LOW)
         GPIO.output(LED_LEFT_PIN, GPIO.LOW)
-        
-        GPIO.cleanup()
         
         STARTUP_DONE = False
     
@@ -224,7 +223,10 @@ def subscribeCallback(client, userdata, message):
         functionSuspension()
     elif action == BACK_COMMAND:
         ## 後退処理
-        functionSuspension()
+        functionBack()
+    elif action == END_COMMAND:
+        ##  終了処理
+        funcitonEnd()
 
     if direction == STRAIGHT_COMMAND:
         ## 直進処理
@@ -249,6 +251,7 @@ def main():
 
     finally:
         funcitonEnd()
-
+        GPIO.cleanup()
+        
 if __name__ == "__main__":
     sys.exit(main())

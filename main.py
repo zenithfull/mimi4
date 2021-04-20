@@ -62,7 +62,7 @@ MOTER_FREQ = 50
 SERVO_MOTER = None
 MQTT_CLIENT = None
 MOTOR_1 = None
-MOTER_2 = None
+MOTOR_2 = None
 
 STARTUP_DONE = False
 #######################################
@@ -84,13 +84,13 @@ def functionStartUp():
         GPIO.setup(MOTER_PIN_1, GPIO.OUT)
         GPIO.setup(MOTER_PIN_2, GPIO.OUT)
 
-        global MOTER_1
+        global MOTOR_1
         MOTOR_1 = GPIO.PWM(MOTER_PIN_1, MOTER_FREQ)
-        MOTER_1.start(0)
+        MOTOR_1.start(0)
 
-        global MOTER_2
+        global MOTOR_2
         MOTOR_2 = GPIO.PWM(MOTER_PIN_2, MOTER_FREQ)
-        MOTER_2.start(0)
+        MOTOR_2.start(0)
 
         GPIO.output(LED_RIGHT_PIN, GPIO.HIGH)
         GPIO.output(LED_LEFT_PIN, GPIO.HIGH)
@@ -120,10 +120,10 @@ def functionDrive():
     if STARTUP_DONE == True:
         print("functionDrive")
 
-        global MOTER_1
-        MOTER_1.ChangeDutyCycle(0)
-        global MOTER_2
-        MOTER_2.ChangeDutyCycle(20)
+        global MOTOR_1
+        MOTOR_1.ChangeDutyCycle(0)
+        global MOTOR_2
+        MOTOR_2.ChangeDutyCycle(20)
     
 #######################################
 # 停止処理
@@ -133,10 +133,10 @@ def functionSuspension():
     if STARTUP_DONE == True:
         print("functionSuspension")
 
-        global MOTER_1
-        MOTER_1.ChangeDutyCycle(0)
-        global MOTER_2
-        MOTER_2.ChangeDutyCycle(0)
+        global MOTOR_1
+        MOTOR_1.ChangeDutyCycle(0)
+        global MOTOR_2
+        MOTOR_2.ChangeDutyCycle(0)
 #######################################
 # 後退処理
 #######################################
@@ -145,10 +145,10 @@ def functionBack():
     if STARTUP_DONE == True:
         print("functionBack")
 
-        global MOTER_1
-        MOTER_1.ChangeDutyCycle(20)
-        global MOTER_2
-        MOTER_2.ChangeDutyCycle(0)
+        global MOTOR_1
+        MOTOR_1.ChangeDutyCycle(20)
+        global MOTOR_2
+        MOTOR_2.ChangeDutyCycle(0)
 
 #######################################
 # 直進処理

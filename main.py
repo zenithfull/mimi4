@@ -18,9 +18,9 @@ ENDPOINT_PORT = 8883
 # ルート証明書ファイル
 ROOT_CA_PATH = 'cert/rootCA.pem'
 # 個別秘密鍵ファイル
-PRIVATE_KEY_PATH = 'cert/bdecd249ca-private.pem.key'
+PRIVATE_KEY_PATH = 'cert/72fc0cbd23-private.pem.key'
 # 個別証明書ファイル
-PRIVATE_CERT_PATH = 'cert/bdecd249ca-certificate.pem.crt'
+PRIVATE_CERT_PATH = 'cert/72fc0cbd23-certificate.pem.crt'
 
 # トピック名
 TOPIC_NAME = 'testTopic'

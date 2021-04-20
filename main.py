@@ -52,7 +52,7 @@ LED_LEFT_PIN = 5
 SERVO_MOTER_PIN = 7
 FREQ = 50
 # モータードライバ
-MOTER_PIN_1 = 20
+MOTER_PIN_1 = 21
 MOTER_PIN_2 = 26
 
 ## I/O コントローラ

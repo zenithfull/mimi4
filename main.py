@@ -46,8 +46,8 @@ MOMO_COMMAND = "./momo --no-audio-device test"
 # GPIO 情報
 ###########################################
 # LEDライト
-LED_RIGHT_PIN = 23
-LED_LEFT_PIN = 24
+LED_RIGHT_PIN = 13
+LED_LEFT_PIN = 5
 # サーボモーター
 SERVO_MOTER_PIN = 7
 FREQ = 50

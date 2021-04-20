@@ -82,7 +82,6 @@ def functionStartUp():
         GPIO.output(LED_RIGHT_PIN, GPIO.HIGH)
         GPIO.output(LED_LEFT_PIN, GPIO.HIGH)
 
-        global STARTUP_DONE
         STARTUP_DONE = True
 
 #######################################

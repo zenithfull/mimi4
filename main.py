@@ -50,7 +50,7 @@ LED_RIGHT_PIN = 13
 LED_LEFT_PIN = 5
 # サーボモーター
 SERVO_MOTER_PIN = 7
-FREQ = 50
+SERVO_FREQ = 50
 # モータードライバ
 MOTER_PIN_1 = 21
 MOTER_PIN_2 = 26
@@ -78,7 +78,7 @@ def functionStartUp():
 
         global SERVO_MOTER
         GPIO.setup(SERVO_MOTER_PIN, GPIO.OUT)
-        SERVO_MOTER = GPIO.PWM(SERVO_MOTER_PIN, FREQ)
+        SERVO_MOTER = GPIO.PWM(SERVO_MOTER_PIN, SERVO_FREQ)
         SERVO_MOTER.start(0.0)
 
         GPIO.setup(MOTER_PIN_1, GPIO.OUT)
@@ -164,7 +164,7 @@ def functionStraight():
     global STARTUP_DONE
     if STARTUP_DONE == True:
         print("functionStraight")
-        servo_angle(0)
+        servo_angle(5)
     
 #######################################
 # 右旋回処理
@@ -173,7 +173,7 @@ def functionRightTurn():
     global STARTUP_DONE
     if STARTUP_DONE == True:
         print("functionRightTurn")
-        servo_angle(-20)
+        servo_angle(25)
 
 #######################################
 # 左旋回処理
@@ -182,7 +182,7 @@ def functionLeftTurn():
     global STARTUP_DONE
     if STARTUP_DONE == True:
         print("functionLeftTurn")
-        servo_angle(20)
+        servo_angle(-30)
 
 #######################################
 # カメラ起動処理

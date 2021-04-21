@@ -151,14 +151,20 @@ def functionBack():
         MOTOR_2.ChangeDutyCycle(0)
 
 #######################################
+# サーボモータの角度設定処理
+#######################################
+def servo_angle(angle):
+    global SERVO_MOTER
+    duty = 2.5 + (12.0 - 2.5) * (angle + 90) / 180   #角度からデューティ比を求める
+    SERVO_MOTER.ChangeDutyCycle(duty)     #デューティ比を変更
+#######################################
 # 直進処理
 #######################################
 def functionStraight():
     global STARTUP_DONE
     if STARTUP_DONE == True:
         print("functionStraight")
-        global SERVO_MOTER
-        SERVO_MOTER.ChangeDutyCycle(0.0)
+        servo_angle(0)
     
 #######################################
 # 右旋回処理
@@ -167,8 +173,7 @@ def functionRightTurn():
     global STARTUP_DONE
     if STARTUP_DONE == True:
         print("functionRightTurn")
-        global SERVO_MOTER
-        SERVO_MOTER.ChangeDutyCycle(2.5)
+        servo_angle(-20)
 
 #######################################
 # 左旋回処理
@@ -177,8 +182,7 @@ def functionLeftTurn():
     global STARTUP_DONE
     if STARTUP_DONE == True:
         print("functionLeftTurn")
-        global SERVO_MOTER
-        SERVO_MOTER.ChangeDutyCycle(12.0)
+        servo_angle(20)
 
 #######################################
 # カメラ起動処理

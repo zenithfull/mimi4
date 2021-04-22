@@ -41,7 +41,7 @@ END_COMMAND = "end"
 # momo 起動情報
 ###########################################
 MOMO_COMMAND = "./momo --no-audio-device test"
-#MOMO_COMMAND = "./momo --no-audio-device ayame wss://ayame-labo.shiguredo.jp/signaling zenithfull@mini4-room --auto --audio false --video true --video-codec-type H264 --video-bit-rate 800 --signaling-key Nlqlm3fKd-ABK5IPoM0LS3pSPgu0DB8o_vNqB1OOahbRn634"
+#MOMO_COMMAND = "./momo --no-audio-device ayame wss://ayame-labo.shiguredo.jp/signaling zenithfull@mini4-room --signaling-key Nlqlm3fKd-ABK5IPoM0LS3pSPgu0DB8o_vNqB1OOahbRn634"
 ###########################################
 # GPIO 情報
 ###########################################
@@ -164,7 +164,7 @@ def functionStraight():
     global STARTUP_DONE
     if STARTUP_DONE == True:
         print("functionStraight")
-        servo_angle(5)
+        servo_angle(20)
     
 #######################################
 # 右旋回処理
@@ -173,7 +173,7 @@ def functionRightTurn():
     global STARTUP_DONE
     if STARTUP_DONE == True:
         print("functionRightTurn")
-        servo_angle(25)
+        servo_angle(50)
 
 #######################################
 # 左旋回処理
